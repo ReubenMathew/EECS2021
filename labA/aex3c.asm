@@ -1,0 +1,6 @@
+addi x5, x0, 0x0000000000000123
+andi x6, x5, 0x000000000000000f
+andi x7, x5, 0x0000000000000ff0
+srai x8, x7, 4
+slli x9, x6, 60
+add x10, x9, x8
