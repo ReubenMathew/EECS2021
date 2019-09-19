@@ -1,0 +1,20 @@
+;0x2222333344445555
+;0x1111222233334444
+
+;0x1000100010001000
+;0x1000100010001100
+
+a: DD 0xAAAABBBBCCCCDDDD
+b: DD 0x4444333322221111
+
+ld x5, a(x0)
+ld x6, b(x0)
+
+addi x7, x0, 16
+add x8, x5, x6
+sd x0, fin(x7)
+
+
+fin: DM 1
+;Calculate a+b, a-b, b-a, a AND b, a OR b, a XOR b, NOT a, NOT b
+
