@@ -1,0 +1,16 @@
+
+s1: DC "What is your name?\0"
+s2: DC "!"
+s3: DC "Hello "
+
+addi x30, x0, s1
+
+ecall x0, x30, 4 ;info string
+ecall x7, x0, 8
+
+ld x8, s3(x0)
+ld x6, s2(x0)
+
+ecall x1, x8, 3
+ecall x1, x7, 3
+ecall x1, x6, 3
