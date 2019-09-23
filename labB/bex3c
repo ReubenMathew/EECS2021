@@ -1,0 +1,33 @@
+dir: DC "John"
+DC "11111"
+DC "Nick"
+DC "22222"
+DC "Sara"
+DC "11111"
+DC "Nick"
+DC "33333"
+DD 0
+
+s1: DC "Enter a phone or a name\nto search for:\0"
+addi x30, x0, s1
+ecall x0, x30, 4
+;Output message
+
+ecall x7, x0, 8 ;input string
+
+add x5, x0, x0 ;phone book indexer
+
+loop: ld x6, dir(x5)
+beq x6, x0, ends
+beq x6, x7, print
+
+incr: 	addi x5, x5, 8
+	beq x0, x0, loop
+
+print: 	ecall x0, x6, 3
+	addi x7, x6, 8
+	ld x8, dir(x7)
+	ecall x0, x8, 3
+	beq x0, x0, incr
+
+ends: ebreak x0, x0, 0
