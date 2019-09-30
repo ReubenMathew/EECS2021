@@ -1,0 +1,17 @@
+a: DF 1.21, 5.85, -7.3, 23.1, -5.55
+b: DF 3.14, -2.1, 44.2, 11.0, -7.77
+
+addi x6, x0, 40
+
+loop:	fld f1, a(x5)
+	fld f2, b(x5)
+	fmul.d f5,f1,f2
+	fadd.d f6, f6, f5
+	addi x5, x5, 8
+	beq x5, x6, end
+	beq x0,x0, loop
+
+end: 	fsd f6, m(x8)
+	ebreak x0, x0, 0
+
+m: DM 1
