@@ -1,0 +1,30 @@
+Stack: EQU 0x100000;set stack in memory
+lui sp, Stack>>12
+
+addi x6, x0, 2
+addi x10, x0, 1
+ecall x5, x0, 5
+
+loop:	beq x5, x0, zero
+	rem x7, x5, x6
+	beq x7, x0, foo
+	beq x0, x0, bar
+
+foo:	sd x0, 0(sp)
+	addi sp, sp, -8
+	div x5 ,x5, x6
+	beq x0, x0, loop
+
+bar:	sd x10, 0(sp)
+	addi sp, sp, -8
+	addi x5, x5, -1
+	div x5 ,x5, x6
+	beq x0, x0, loop
+
+beq x0, x0, end
+
+
+zero:	sd x5, 0(sp)
+	ebreak x0, x0, 0
+
+end: ebreak x0, x0, 0
