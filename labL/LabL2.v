@@ -1,4 +1,4 @@
-module labK2;
+module labL2;
 reg[1:0] a,b;
 reg c;
 wire[1:0] z;
