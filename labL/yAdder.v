@@ -1,4 +1,4 @@
-module yAdder1(z, cout, a, b, cin);
+module yAdder(z, cout, a, b, cin);
 output z, cout;
 input a, b, cin;
 xor left_xor(tmp, a, b);

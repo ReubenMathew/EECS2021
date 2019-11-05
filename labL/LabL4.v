@@ -1,4 +1,4 @@
-module labL3;
+module labL4;
 reg[31:0] a0,a1,a2,a3;
 reg [1:0]c;
 wire[31:0] z;
