@@ -1,9 +1,11 @@
 module yAdder(z, cout, a, b, cin);
-output z, cout;
-input a, b, cin;
-xor left_xor(tmp, a, b);
-xor right_xor(z, cin, tmp);
-and left_and(outL, a, b);
-and right_and(outR, tmp, cin);
-or my_or(cout, outR, outL);
+output [31:0] z;
+output cout;
+input [31:0] a, b;
+input cin;
+wire[31:0] in, out;
+yAdder1 mine[31:0](z, out, a, b, in);
+assign in[0] = cin;
+assign in[31:1] = out[30:0];
+assign cout = out[31];
 endmodule
