@@ -29,7 +29,11 @@ begin
 		end else if(op==6) begin
 			expect = a-b;
 			$display("ADD: expect=%d actual=%d",expect,z);
-		end 		
+		end else if (op == 3'b111) begin
+			expect = (a < b) ? 1 : 0;
+			$display("SLT: expect=%d actual=%d",expect,z);
+		end
+		
 	end
 $finish;
 end

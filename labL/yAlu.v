@@ -10,8 +10,8 @@ wire cout;
 
 xor(condition, a[31],b[31]);
 //a-b in case of slt condition
-yArith slt_arith (tmpRes, cout, a, b, 1);
-yMux #(.SIZE(1)) slt_mux(slt[0], tmpRes[31], a[31], condition);
+yArith slt_arith (tmpRes, cout, a, b, 1'd1);
+yMux #(1) slt_mux(slt[0], tmpRes[31], a[31], condition);
 
 and my_and[31:0](tempAnd, a,b);
 or my_or[31:0](tempOr, a, b);
