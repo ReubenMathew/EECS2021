@@ -25,7 +25,7 @@ begin
     RegWrite=1; ALUSrc=0; op=3'b011;
 end
 
-if(ins[6:0]==7'h6f)//UJ-Type
+if(ins[6:0]==7'h6f)//UJ-Type 
 begin
     RegWrite=1; ALUSrc=1; op=3'b110;
 end
