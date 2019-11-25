@@ -3,7 +3,7 @@ module rf(RD1,RD2, RN1,RN2, WN,WD, clk, W);
 Behavioral register file
 Written by H. Roumani, 2009
 ****************************/
-parameter DEBUG = ;
+parameter DEBUG = 0;
 
 input clk, W;
 input [4:0] RN1, RN2, WN;
