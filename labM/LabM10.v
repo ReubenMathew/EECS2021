@@ -62,7 +62,7 @@ initial
     //    #4 $display(" I Type: ins=%h: rd1=%2h rd2=%2h  wb=%2d", ins[11:7], rd1, rd2, wb);
     end
 
-    if(ins[6:0] == 7'h13)//I_type
+    if(ins[6:0] == 7'h13)//I_type ADDI
     begin
         RegWrite=1; ALUSrc=1; 
         MemRead = 0; MemWrite = 0; Mem2Reg = 0;
@@ -80,6 +80,7 @@ initial
     begin
         RegWrite=0; ALUSrc=0;
         MemRead = 0; MemWrite = 0; Mem2Reg = 0;
+       // $display("BEQ");
     end
     //---------------------------------Execute the ins
     clk = 0; #1;
@@ -89,17 +90,17 @@ initial
     //---------------------------------Prepare for the next ins
     if (ins[6:0] == 7'b1100011 && zero == 1)
       begin
-      PCin = PCin + (imm << 2); 
-      //$display("here 1");
+      PCin = PCin + (imm << 1) ; 
       end
     else if (ins[6:0] == 7'b1101111)
       begin
-      PCin = PCin + (jTarget << 2); 
-      //$display("here 2");
+      PCin = PCin + (jTarget << 2);
+      //$display("LOOP: %h", PCin); 
       end
     else
       begin
       PCin = PCp4;
+      //$display("%h",PCin);
       end
 
 

@@ -39,5 +39,5 @@ ff7ff06f: rd1= x rd2= x z= x zero=x wb= x
 ff7ff06f: rd1= x rd2= x z= x zero=x wb= x
 000f2283: rd1=24 rd2= 0 z= 24 zero=0 wb= 0
 00028563: rd1= 0 rd2= 0 z= 0 zero=1 wb= 0
-xxxxxxxx: rd1= x rd2= x z= x zero=x wb= x
-xxxxxxxx: rd1= x rd2= x z= x zero=x wb= x
+02802023: rd1= 0 rd2=36 z= 32 zero=0 wb=32
+02a02223: rd1= 0 rd2=15 z= 36 zero=0 wb=36

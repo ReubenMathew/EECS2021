@@ -4,7 +4,7 @@ Behavioral Memory Unit.
 Written by H. Roumani, 2009.
 ****************************/
 
-parameter DEBUG = 1;
+parameter DEBUG = 0;
 
 parameter CAPACITY = 16'hffff;
 input clk, read, write;
