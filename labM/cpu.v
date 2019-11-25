@@ -63,7 +63,6 @@ output [31:0] z;
 output ex;
 wire[31:0] tempArith,tempAnd,tempOr,slt,tmpRes;
 assign slt[31:1] = 0;
-assign ex = 0; // not supported
 wire cout;
 
 wire [15:0] z16;
@@ -156,7 +155,12 @@ input ALUSrc;
 
 yMux #(32) mux(b,rd2,imm,ALUSrc);
 yAlu alu(z,zero,rd1,b,op);
-
+/*
+always @(z)
+	begin
+	if(ALUSrc!=0) $display("ALU: computed %h || %h  w/ op=%b output: z=%h", rd1, b,op,z);
+	end
+*/
 endmodule
 
 module yDM(memOut, exeOut, rd2, clk, MemRead, MemWrite) ;
@@ -167,7 +171,7 @@ module yDM(memOut, exeOut, rd2, clk, MemRead, MemWrite) ;
    mem memory(memOut, exeOut, rd2, clk, MemRead, MemWrite);
 endmodule // yDM
 
-module yWB(wb, exeOut, memOut, Mem2Reg) ;
+module yWB(wb, exeOut, memOut, Mem2Reg);
    output [31:0] wb;
    input [31:0]  exeOut, memOut;
    input         Mem2Reg;

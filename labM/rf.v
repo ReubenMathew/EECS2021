@@ -19,7 +19,7 @@ always @(RN1 or arr[RN1])
 	else
 	begin
 		RD1 = arr[RN1];
-		if (DEBUG != 0) $display("RF: read %0dd from reg#%0d", RD1, RN1);
+		if (DEBUG != 0) $display("RF: read %0d from reg#%0d", RD1, RN1);
 	end
 
 always @(RN2 or arr[RN2])
@@ -28,7 +28,7 @@ always @(RN2 or arr[RN2])
 	else
 	begin
 		RD2 = arr[RN2];
-		if (DEBUG != 0) $display("RF: read %0dd from reg#%0d", RD2, RN2);
+		if (DEBUG != 0) $display("RF: read %0d from reg#%0d", RD2, RN2);
 	end
 		
 
@@ -36,7 +36,7 @@ always @(posedge clk)
 	if (W == 1 && WN != 0)
 	begin
 		arr[WN] = WD;
-		if (DEBUG != 0) $display("RF: wrote %0dd to reg#%0d", WD, WN);
+		if (DEBUG != 0) $display("RF: wrote %0d to reg#%0d", WD, WN);
 	end
 
 endmodule
