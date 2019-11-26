@@ -4,19 +4,18 @@ reg RegWrite, clk, ALUSrc, MemRead,MemWrite, Mem2Reg, INT;
 reg [2:0] op;
 reg[31:0] branchImm,jImm,entryPoint;
 wire [31:0] PCin;
-wire [31:0] wd, rd1,branch, rd2, imm, ins, PCp4, PC, z,memOut,wb,jTarget;
-wire zero;
-wire isStype, isRtype, isItype, isLw, isjump, isbranch;
+wire [31:0] wd, rd1,branch, rd2, imm, ins, PCp4, PC, exeOut,memOut,wb,jTarget;
+wire isStype, isRtype, isItype, isLw, isjump, isbranch, zero;
+wire[6:0] opCode;
 
 yIF myIF(ins, PC, PCp4, PCin, clk);
 yID myID(rd1, rd2, imm, jTarget, branch, ins, wd, RegWrite, clk);
-yEX myEx(z, zero, rd1, rd2, imm, op, ALUSrc);
-yDM myDM(memOut, z, rd2, clk, MemRead, MemWrite);
-yWB myWB(wb, z, memOut, Mem2Reg);
-yC1 myC1(isStype, isRtype, isItype, isLw, isjump, isbranch,ins[6:0]);
+yEX myEx(exeOut, zero, rd1, rd2, imm, op, ALUSrc);
+yDM myDM(memOut, exeOut, rd2, clk, MemRead, MemWrite);
+yWB myWB(wb, exeOut, memOut, Mem2Reg);
 yPC myPC(PCin, PC, PCp4,INT,entryPoint,branch,jTarget,zero,isbranch,isjump);
-
-
+assign opCode = ins[6:0];
+yC1 myC1(isStype, isRtype, isItype, isLw, isjump, isbranch,opCode);
 
 assign wd = wb;
 
@@ -93,7 +92,7 @@ initial
     clk = 0; #1;
     //---------------------------------View results
     //$display("ins=%h rd1=%h rd2=%h imm=%d jTarget=%h z=%h zero=%h",ins,rd1,rd2,imm,jTarget,z,zero);
-    #4 $display("%h: rd1=%2d rd2=%2d z= %1d zero=%b wb=%2d", ins, rd1, rd2, z, zero, wb);
+    #4 $display("%h: rd1=%2d rd2=%2d exeOut= %1d zero=%b wb=%2d", ins, rd1, rd2, exeOut, zero, wb);
     //---------------------------------Prepare for the next ins
    /* if (INT == 1)
         PCin = entryPoint; else

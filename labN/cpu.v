@@ -218,7 +218,7 @@ endmodule
 module yC1(isStype, isRtype, isItype, isLw, isjump, isbranch, opCode);
 output isStype, isRtype, isItype, isLw, isjump, isbranch;
 input [6:0] opCode;
-wire lwor, ISselect, JBselect, sbz, sz;
+wire lwor, ISselect, JBselect, sbz;
 
 // opCode
 // lw 0000011
@@ -240,9 +240,19 @@ and (isItype, ISselect, opCode[4]);
 and (isRtype, opCode[4], opCode[5]);
 // Select between JAL and Branch
 and (JBselect, opCode[5], opCode[6]);
-
-not (sbz, opCode[6]);
+not (sbz, opCode[4]);
 and (isbranch, JBselect, sbz);
+always @(JBselect==1)
+begin
+$display("op5=%b op6=%b JB=%b sbz=%b",opCode[5],opCode[6], JBselect, sbz);
+end
+
+/*
+always @(isjump)
+begin
+$display("THIS IS A BEQ %b",isbranch);
+end
+*/
 endmodule
 
 module yC2(RegWrite, ALUSrc, MemRead, MemWrite, Mem2Reg, isStype, isRtype, 
@@ -253,8 +263,8 @@ module yC2(RegWrite, ALUSrc, MemRead, MemWrite, Mem2Reg, isStype, isRtype,
    assign Mem2Reg = isItype;
    assign MemRead = isItype;
    assign MemWrite = isStype;
-   nor (ALUSrc,Mem2Reg,branch);
-   nor (RegWrite, isStype, branch);
+   nor (ALUSrc,isRtype,isbranch);
+   nor (RegWrite, isStype, isbranch);
 
 // You need two or gates and 3 assignments;
 endmodule
