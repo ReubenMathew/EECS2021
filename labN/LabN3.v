@@ -50,8 +50,8 @@ initial
         end
     end
 
-    //if(isbranch==1)
-      //$display("branch statement");
+    if(isbranch==1)
+      $display("branch statement");
 
 
     //---------------------------------Execute the ins

@@ -242,11 +242,12 @@ and (isRtype, opCode[4], opCode[5]);
 and (JBselect, opCode[5], opCode[6]);
 not (sbz, opCode[4]);
 and (isbranch, JBselect, sbz);
-always @(JBselect==1)
+/*
+always @(isbranch)
 begin
-$display("op5=%b op6=%b JB=%b sbz=%b",opCode[5],opCode[6], JBselect, sbz);
+$display("isb=%b op5=%b op6=%b JB=%b sbz=%b",isbranch, opCode[5],opCode[6], JBselect, sbz);
 end
-
+*/
 /*
 always @(isjump)
 begin
